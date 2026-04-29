@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cronograma RESET — Bolix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=IxmwYQZcB01SD--tAQIsBkJMKrm6tVO-BQqUdIPR9xae_txPViVwokNSdtucIvV261gokdATE0tvti544NFVfqZB5D70qxRkFLmW1Q_8CIl8mv-p34IbZcp-AVdp_P6PV0LX04UufYIK3DSQ6zZkS4BoWw3YndxjcP9qzXYHGLUggybNqzB_KvHv65vuiBgSLpJauCU-EYQ6PJJ-LUr8AydzqZpuN7krL_zSkcGIU2Sak9M21GnFD4-DSSgCFKyt_9A8rHC0lpJfor5EEfZk-A" charset="UTF-8"></script><style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:        #060d1a;
+    --surface:   #0b1628;
+    --surface2:  #111f35;
+    --border:    #1e3050;
+    --border2:   #2a4268;
+    --text:      #cdd9ee;
+    --muted:     #5a7499;
+    --accent:    #503294;
+    --accent2:   #382464;
+    --brand:     #a8cc3a;
+    --brand-dk:  #87a72e;
+    --green:     #34d399;
+    --yellow:    #fbbf24;
+    --red:       #f87171;
+    --cyan:      #06b6d4;
+    --orange:    #f59e0b;
+    --purple:    #a855f7;
+    --blue:      #3b82f6;
+    --teal:      #14b8a6;
+    --font-main: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-main); background: var(--bg); color: var(--text); font-size: 13px; line-height: 1.5; }
+
+  /* HEADER */
+  header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .header-inner { max-width: 1600px; margin: 0 auto; padding: 18px 28px; display: flex; align-items: center; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .header-badge { background: var(--brand); color: #2b1547; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 6px; letter-spacing: .05em; }
+  header h1 { font-size: 18px; font-weight: 600; color: #e8f0fe; }
+  header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .header-right { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--border2); border-radius: 8px; background: var(--surface2); color: var(--text); font-family: var(--font-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .btn:hover { border-color: var(--accent); color: #fff; }
+  .btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* CONTAINER */
+  .container { max-width: 1600px; margin: 0 auto; padding: 24px 28px 60px; }
+
+  /* SUMMARY */
+  .summary { display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .summary-card strong { display: block; font-size: 18px; font-family: var(--font-mono); color: #e8f0fe; font-weight: 600; }
+  .summary-card span { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; text-transform: uppercase; letter-spacing: .05em; }
+
+  /* GOVERNANCE */
+  .governance { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; margin-bottom: 18px; }
+  .governance h2 { margin: 0 0 12px; font-size: 14px; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: .07em; padding-bottom: 8px; border-bottom: 1px solid rgba(168,204,58,.2); }
+  .governance p { margin: 8px 0; color: var(--text); line-height: 1.6; font-size: 13px; }
+  .governance strong { color: #fff; font-weight: 600; }
+  .inline-dot { width: 12px; height: 12px; border-radius: 999px; display: inline-block; vertical-align: -1px; margin-right: 8px; border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--border2); }
+  .dot-red    { background: var(--red); }
+  .dot-blue   { background: var(--blue); }
+  .dot-meeting{ background: var(--cyan); }
+
+  /* TOOLBAR */
+  .toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  .toolbar-search { flex: 1; min-width: 220px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; font-family: var(--font-main); font-size: 13px; outline: none; transition: border-color .15s, box-shadow .15s; }
+  .toolbar-search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(80,50,148,.20); }
+  .toolbar-search::placeholder { color: var(--muted); }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { padding: 6px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid; background: transparent; transition: all .15s; font-family: var(--font-main); text-transform: uppercase; letter-spacing: .04em; user-select: none; display: inline-flex; align-items: center; gap: 6px; }
+  .chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .chip:not(.active) { opacity: .35; }
+  .chip[data-unit="pre"]        { color: #fde68a; border-color: rgba(253,230,138,.4); } .chip[data-unit="pre"] i        { background:#fde68a; }
+  .chip[data-unit="meeting"]    { color: var(--cyan); border-color: rgba(6,182,212,.4); } .chip[data-unit="meeting"] i    { background: var(--cyan); }
+  .chip[data-unit="abc"]        { color: #22c55e; border-color: rgba(34,197,94,.4); } .chip[data-unit="abc"] i        { background:#22c55e; }
+  .chip[data-unit="patio"]      { color: var(--blue); border-color: rgba(59,130,246,.4); } .chip[data-unit="patio"] i      { background: var(--blue); }
+  .chip[data-unit="interlagos"] { color: var(--orange); border-color: rgba(245,158,11,.4); } .chip[data-unit="interlagos"] i { background: var(--orange); }
+  .chip[data-unit="guarulhos"]  { color: var(--purple); border-color: rgba(168,85,247,.4); } .chip[data-unit="guarulhos"] i  { background: var(--purple); }
+  .chip.active { box-shadow: 0 0 0 1px currentColor inset; }
+  .toolbar-divider { width: 1px; height: 26px; background: var(--border); }
+  .year-jumps { display: flex; gap: 4px; }
+  .year-jumps .btn { padding: 7px 12px; font-size: 11px; }
+
+  /* CALENDAR — scroll container unico (X e Y), com altura fixa, garante sticky 100% confiavel */
+  .calendar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    /* Importante: não esconder overflow aqui, senão o sticky pode falhar em alguns navegadores */
+    overflow: visible;
+    width: max-content;
+    min-width: 100%;
+  }
+  .calendar-scroll {
+    overflow: auto;
+    max-height: calc(100vh - 240px);
+    min-height: 480px;
+    border-radius: 14px;
+    position: relative;
+    /* Scrollbars estilizadas */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border2) var(--surface2);
+  }
+  .calendar-scroll::-webkit-scrollbar { width: 12px; height: 12px; }
+  .calendar-scroll::-webkit-scrollbar-track { background: var(--surface2); }
+  .calendar-scroll::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 6px; border: 2px solid var(--surface2); }
+  .calendar-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .calendar-header {
+    display: grid;
+    grid-template-columns: 360px 3600px;
+    background: var(--surface2);
+    border-bottom: 2px solid var(--brand);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 4px 12px rgba(0,0,0,.5);
+  }
+  .calendar-header > div {
+    padding: 14px 16px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--brand);
+    background: var(--surface2);
+  }
+  /* Canto superior-esquerdo (Acao/Unidade) - sticky em ambas as direcoes */
+  .calendar-header > div:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 60;
+    background: var(--surface2);
+    border-right: 1px solid var(--border);
+    box-shadow: 6px 0 10px rgba(0,0,0,.25);
+  }
+  .calendar-header .months {
+    z-index: 50;
+  }
+  .months { position: relative; min-height: 44px; min-width: 3600px; border-left: 1px solid var(--border); padding: 0; }
+  .month-label { position: absolute; top: 14px; transform: translateX(8px); font-size: 11px; color: var(--muted); white-space: nowrap; font-weight: 500; pointer-events: none; }
+  .month-line { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(148,163,184,.15); }
+  .unit-separator {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .04em;
+    min-width: 3960px;
+    position: sticky;
+    left: 0;
+    z-index: 45;
+    text-transform: uppercase;
+    border-top: 2px solid var(--brand);
+    border-bottom: 1px solid var(--accent2);
+    padding: 0;
+  }
+  .unit-separator-text {
+    position: sticky;
+    left: 0;
+    padding: 16px 22px;
+    display: block;
+    width: 360px;
+    background: var(--accent);
+    z-index: 46;
+    line-height: 1.4;
+  }
+  .unit-separator-text span {
+    font-size: 11px;
+    color: rgba(255,255,255,.85);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    display: block;
+    margin-top: 4px;
+  }
+  .calendar-row { display: grid; grid-template-columns: 360px 3600px; min-height: 78px; border-bottom: 1px solid var(--border); transition: background .15s; }
+  .calendar-row:hover { background: rgba(80,50,148,.06); }
+  .calendar-row.row-hidden { display: none; }
+  .task-info { padding: 12px 16px; border-right: 1px solid var(--border); position: sticky; left: 0; background: var(--surface); z-index: 40; transition: background .15s; box-shadow: 6px 0 10px rgba(0,0,0,.18); }
+  .calendar-row:hover .task-info { background: rgba(80,50,148,.10); }
+  .task-info strong { display: block; font-size: 13px; color: #e8f0fe; font-weight: 600; }
+  .task-info span { display: block; margin-top: 3px; font-size: 12px; color: var(--text); line-height: 1.35; }
+  .task-info small { display: block; margin-top: 4px; color: var(--muted); font-size: 10.5px; font-family: var(--font-mono); }
+  .task-info .governance-note { color: var(--text); }
+  .timeline-cell { position: relative; min-width: 3600px; background-image: linear-gradient(to right, rgba(148,163,184,.07) 1px, transparent 1px); background-size: calc(100% / 20) 100%; }
+  .bar { position: absolute; top: 18px; height: 28px; min-width: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.4); white-space: nowrap; overflow: hidden; padding: 0 10px; cursor: pointer; transition: transform .15s, box-shadow .15s; letter-spacing: .03em; }
+  .bar:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.5); z-index: 5; }
+  .marker { position: absolute; top: 50px; width: 12px; height: 12px; border-radius: 999px; transform: translateX(-50%); border: 2px solid var(--surface); box-shadow: 0 0 0 1.5px var(--border2); cursor: help; transition: transform .15s; }
+  .marker:hover { transform: translateX(-50%) scale(1.3); }
+  .marker-red     { background: var(--red); }
+  .marker-blue    { background: var(--blue); top: 64px; }
+  .marker-meeting { background: var(--cyan); top: 64px; }
+
+  /* Cores das barras */
+  .pre        { background: linear-gradient(135deg, #fde68a, #fbbf24); color: #1f2937; }
+  .abc        { background: linear-gradient(135deg, #34d399, #16a34a); }
+  .patio      { background: linear-gradient(135deg, #60a5fa, #2563eb); }
+  .interlagos { background: linear-gradient(135deg, #fbbf24, #d97706); }
+  .guarulhos  { background: linear-gradient(135deg, #c084fc, #7c3aed); }
+  .meeting    { background: linear-gradient(135deg, #22d3ee, #0891b2); color: #082f49; }
+  .meeting-done { background: linear-gradient(135deg, #2dd4bf, #0d9488); color: #082f49; }
+
+  /* Linha de hoje */
+  #today-line { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--brand); box-shadow: 0 0 14px rgba(168,204,58,.5); z-index: 15; pointer-events: none; }
+  #today-line::before { content: 'HOJE'; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #1f2937; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; letter-spacing: .08em; white-space: nowrap; }
+
+  /* Tooltip */
+  #tooltip { position: fixed; background: var(--surface2); border: 1px solid var(--border2); color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 12px; line-height: 1.5; max-width: 320px; pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .15s, transform .15s; z-index: 9999; box-shadow: 0 8px 24px rgba(0,0,0,.6); }
+  #tooltip.show { opacity: 1; transform: translateY(0); }
+  #tooltip strong { color: var(--brand); display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+
+  /* Legenda */
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; color: var(--text); font-size: 12px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  .legend > span { display: inline-flex; align-items: center; gap: 8px; }
+  .legend i { width: 12px; height: 12px; border-radius: 999px; display: inline-block; box-shadow: 0 0 0 1px rgba(255,255,255,.1); }
+  .legend i.pre        { background: linear-gradient(135deg,#fde68a,#fbbf24); }
+  .legend i.abc        { background: linear-gradient(135deg,#34d399,#16a34a); }
+  .legend i.patio      { background: linear-gradient(135deg,#60a5fa,#2563eb); }
+  .legend i.interlagos { background: linear-gradient(135deg,#fbbf24,#d97706); }
+  .legend i.guarulhos  { background: linear-gradient(135deg,#c084fc,#7c3aed); }
+  .legend i.meeting    { background: linear-gradient(135deg,#22d3ee,#0891b2); }
+  .legend i.dot-red    { background: var(--red); }
+  .legend i.dot-blue   { background: var(--blue); }
+  .legend i.brand-dot  { background: var(--brand); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .summary { grid-template-columns: 1fr 1fr; }
+    .calendar-header, .calendar-row { grid-template-columns: 280px 3600px; }
+    .task-info { padding: 10px 12px; }
+    .task-info strong { font-size: 12px; }
+    .task-info span { font-size: 11px; }
+    .header-inner { padding: 14px 16px; }
+    .container { padding: 16px 14px 40px; }
+  }
+  @media (max-width: 600px) {
+    .summary { grid-template-columns: 1fr; }
+    h1 { font-size: 16px; }
+    .toolbar-search { min-width: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="header-badge">RESET</span>
+      <div>
+        <h1>Cronograma Operacional</h1>
+        <p>Pré-RESET, ações por unidade, melhorias associadas e reuniões com Edelson · até 31/10/2027</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="btn" onclick="scrollToToday()">📍 Hoje</button>
+      <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="summary-card"><strong>16/03/2026</strong><span>Início da fase estratégica</span></div>
+    <div class="summary-card"><strong>48</strong><span>Ações lançadas no calendário</span></div>
+    <div class="summary-card"><strong>667</strong><span>Melhorias associadas às ações</span></div>
+    <div class="summary-card"><strong>31/10/2027</strong><span>Limite visual do calendário</span></div>
+  </div>
+
+  <!-- GOVERNANCE -->
+  <div class="governance">
+    <h2>Regra de governança por entrega</h2>
+    <p><span class="inline-dot dot-red"></span>Prazo limite para a atualização da planilha matriz antes da entrega da ação.</p>
+    <p><span class="inline-dot dot-blue"></span>Momento de consulta, avaliação da aderência e liberação da próxima ação.</p>
+    <p><span class="inline-dot dot-meeting"></span>Reuniões e marcos de alinhamento com Edelson.</p>
+    <p><strong>Meta:</strong> cada ação deve atingir no mínimo <strong>85% de aderência</strong>. Se ficar abaixo disso, o processo não avança direto: o item que comprometeu o resultado será reciclado antes da próxima ação.</p>
+    <p><strong>Retomada:</strong> avaliar a falha, criar melhoria, ajustar o processo e implementar a correção antes da liberação da próxima etapa.</p>
+    <p><strong>Limite visual:</strong> o calendário foi limitado até <strong>31/10/2027</strong>; as barras se estendem do início ao término programado da ação; quando ultrapassarem o limite visual, são encerradas em 31/10/2027.</p>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <input class="toolbar-search" id="search" placeholder="🔎 Buscar ação por código (ex: AC05) ou texto..." />
+    <div class="toolbar-divider"></div>
+    <div class="chips" id="chips">
+      <button class="chip active" data-unit="pre"><i></i>Pré-RESET</button>
+      <button class="chip active" data-unit="meeting"><i></i>Reuniões</button>
+      <button class="chip active" data-unit="abc"><i></i>Grande ABC</button>
+      <button class="chip active" data-unit="patio"><i></i>Pátio Paulista</button>
+      <button class="chip active" data-unit="interlagos"><i></i>Interlagos</button>
+      <button class="chip active" data-unit="guarulhos"><i></i>Guarulhos</button>
+    </div>
+    <div class="toolbar-divider"></div>
+    <div class="year-jumps">
+      <button class="btn" onclick="jumpToMonth('Mar/2026')">2026</button>
+      <button class="btn" onclick="jumpToMonth('Jan/2027')">2027</button>
+    </div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="calendar-scroll">
+<div class="calendar">
+    <div class="calendar-header">
+      <div>Ação / Unidade</div>
+      <div class="months"><span class="month-label" style="left:0.0000%">Mar/2026</span><span class="month-line" style="left:0.0000%"></span><span class="month-label" style="left:2.6936%">Abr/2026</span><span class="month-line" style="left:2.6936%"></span><span class="month-label" style="left:7.7441%">Mai/2026</span><span class="month-line" style="left:7.7441%"></span><span class="month-label" style="left:12.9630%">Jun/2026</span><span class="month-line" style="left:12.9630%"></span><span class="month-label" style="left:18.0135%">Jul/2026</span><span class="month-line" style="left:18.0135%"></span><span class="month-label" style="left:23.2323%">Ago/2026</span><span class="month-line" style="left:23.2323%"></span><span class="month-label" style="left:28.4512%">Set/2026</span><span class="month-line" style="left:28.4512%"></span><span class="month-label" style="left:33.5017%">Out/2026</span><span class="month-line" style="left:33.5017%"></span><span class="month-label" style="left:38.7205%">Nov/2026</span><span class="month-line" style="left:38.7205%"></span><span class="month-label" style="left:43.7710%">Dez/2026</span><span class="month-line" style="left:43.7710%"></span><span class="month-label" style="left:48.9899%">Jan/2027</span><span class="month-line" style="left:48.9899%"></span><span class="month-label" style="left:54.2088%">Fev/2027</span><span class="month-line" style="left:54.2088%"></span><span class="month-label" style="left:58.9226%">Mar/2027</span><span class="month-line" style="left:58.9226%"></span><span class="month-label" style="left:64.1414%">Abr/2027</span><span class="month-line" style="left:64.1414%"></span><span class="month-label" style="left:69.1919%">Mai/2027</span><span class="month-line" style="left:69.1919%"></span><span class="month-label" style="left:74.4108%">Jun/2027</span><span class="month-line" style="left:74.4108%"></span><span class="month-label" style="left:79.4613%">Jul/2027</span><span class="month-line" style="left:79.4613%"></span><span class="month-label" style="left:84.6801%">Ago/2027</span><span class="month-line" style="left:84.6801%"></span><span class="month-label" style="left:89.8990%">Set/2027</span><span class="month-line" style="left:89.8990%"></span><span class="month-label" style="left:94.9495%">Out/2027</span><span class="month-line" style="left:94.9495%"></span><span class="month-label" style="left:100.0000%">31/10/2027</span><span class="month-line" style="left:100.0000%"></span></div>
+    </div>
+    <div class="unit-separator"><div class="unit-separator-text">Pré-RESET<br><span style='font-size:11px; color:#cbd5e1;'>(Pré-Projeto / Imersão / Diagnóstico / Planejamento / Execução)</span></div></div>
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E1</strong>
+          <span>Definição e estruturação do projeto</span>
+          <small>16/03/2026 → 16/03/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 16/03/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:0.0000%; width:0.4500%;">E1</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E2</strong>
+          <span>Aplicação da leitura e mapeamento inicial</span>
+          <small>18/03/2026 → 18/03/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 18/03/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:0.3367%; width:0.4500%;">E2</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E3</strong>
+          <span>Imersão em campo</span>
+          <small>27/03/2026 → 27/03/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 27/03/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:1.8519%; width:0.4500%;">E3</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E4</strong>
+          <span>Consolidação e tratamento das informações</span>
+          <small>01/04/2026 → 01/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 01/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:2.6936%; width:0.4500%;">E4</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E5</strong>
+          <span>Diagnóstico estratégico</span>
+          <small>02/04/2026 → 02/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 02/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:2.8620%; width:0.4500%;">E5</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E6</strong>
+          <span>Validação e alinhamento executivo</span>
+          <small>15/04/2026 → 15/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 15/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:5.0505%; width:0.4500%;">E6</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E7</strong>
+          <span>Desenvolvimento de direcionamento de projetos</span>
+          <small>17/04/2026 → 17/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 17/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:5.3872%; width:0.4500%;">E7</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E8</strong>
+          <span>Planos de ação detalhados</span>
+          <small>20/04/2026 → 20/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 20/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:5.8923%; width:0.4500%;">E8</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E9</strong>
+          <span>Estruturação do sistema de execução RESET</span>
+          <small>22/04/2026 → 22/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 22/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:6.2290%; width:0.4500%;">E9</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pré-RESET — E10</strong>
+          <span>Consolidação do cronograma</span>
+          <small>23/04/2026 → 23/04/2026 • 1 dia</small>
+          <small class="governance-note">Marco único em 23/04/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar pre" style="left:6.3973%; width:0.4500%;">E10</div>
+          
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Reuniões — Edelson</strong>
+          <span>Reuniões agendadas com Edelson</span>
+          <small>04/05/2026 e 05/05/2026 • 14:00</small>
+          <small class="governance-note">Datas agendadas: 04/05/2026 e 05/05/2026 • 14:00</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar meeting" style="left:21.3974%; width:0.8696%;">14h</div>
+          <span class="marker marker-meeting" style="left:21.3974%;" title="Reunião com Edelson — 04/05/2026 às 14:00"></span>
+          <span class="marker marker-meeting" style="left:21.8341%;" title="Reunião com Edelson — 05/05/2026 às 14:00"></span>
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Reunião — apresentação RESET</strong>
+          <span>1ª reunião de apresentação do sistema RESET para Edelson</span>
+          <small>29/04/2026 → 29/04/2026 • 1 dia</small>
+          <small class="governance-note">Realizada em 29/04/2026 às 08:00</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar meeting-done" style="left:7.4074%; width:0.4500%;">08h</div>
+          
+        </div>
+      </div>
+    <div class="unit-separator"><div class="unit-separator-text">Grande ABC<br><span style='font-size:11px; color:#cbd5e1;'>(Implantação / Acompanhamento / Entrega)</span></div></div>
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-01</strong>
+          <span>Controle e regularização do sistema de ar-condicionado</span>
+          <small>30/04/2026 → 05/05/2026 • 6 dias</small>
+          <small class="governance-note">6 melhorias associadas • Planilha até 05/05/2026 • Consulta em 06/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:7.5758%; width:1.0101%;">AC01</div>
+          
+          <span class="marker marker-red" style="left:21.8341;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:22.2707;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-02</strong>
+          <span>Redes Sociais: Fase 1 — Transição da gestão; Fase 2 — Levantamento de informações; Fase 3 — Escuta das unidades; Fase 4 — Planejamento inicial; Fase 5 — Execução e rotina</span>
+          <small>30/04/2026 → 10/06/2026 • 42 dias</small>
+          <small class="governance-note">11 melhorias associadas • Planilha até 10/06/2026 • Consulta em 11/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:7.5758%; width:7.0707%;">AC02</div>
+          
+          <span class="marker marker-red" style="left:14.4781%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:14.6465%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-03</strong>
+          <span>Pesquisa com clientes: Fase 1 — Desenvolvimento das pesquisas; Fase 2 — Finalidade por unidade; Fase 3 — Aplicação em rodízio; Fase 4 — Consolidação dos dados; Fase 5 — Desdobramento estratégico; Fase 6 — Objetivo maior</span>
+          <small>01/05/2026 → 09/10/2027 • 527 dias</small>
+          <small class="governance-note">16 melhorias associadas • Planilha até 09/10/2027 • Consulta em 10/10/2027</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:7.7441%; width:88.7205%;">AC03</div>
+          
+          <span class="marker marker-red" style="left:96.2963%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:96.4646%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-04</strong>
+          <span>Implementação de SLA de manutenção crítica</span>
+          <small>08/05/2026 → 15/05/2026 • 8 dias</small>
+          <small class="governance-note">8 melhorias associadas • Planilha até 15/05/2026 • Consulta em 16/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:8.9226%; width:1.3468%;">AC04</div>
+          
+          <span class="marker marker-red" style="left:10.1010%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:10.2694%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-05</strong>
+          <span>Manutenção de games e integração ao SLA crítico</span>
+          <small>15/05/2026 → 25/05/2026 • 11 dias</small>
+          <small class="governance-note">9 melhorias associadas • Planilha até 25/05/2026 • Consulta em 26/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:10.1010%; width:1.8519%;">AC05</div>
+          
+          <span class="marker marker-red" style="left:11.7845%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:11.9529%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-06</strong>
+          <span>Estruturação do Grand Plaza como HUB de gestão replicável</span>
+          <small>26/05/2026 → 15/06/2026 • 21 dias</small>
+          <small class="governance-note">10 melhorias associadas • Planilha até 15/06/2026 • Consulta em 16/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:11.9529%; width:3.5354%;">AC06</div>
+          
+          <span class="marker marker-red" style="left:15.3199%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:15.4882%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-07</strong>
+          <span>Eliminação da cobrança direta de sapatos e reestruturação do modelo de entrada</span>
+          <small>17/06/2026 → 27/06/2026 • 11 dias</small>
+          <small class="governance-note">9 melhorias associadas • Planilha até 27/06/2026 • Consulta em 28/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:15.6566%; width:1.8519%;">AC07</div>
+          
+          <span class="marker marker-red" style="left:17.3401%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:17.5084%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-08</strong>
+          <span>Estruturação e ativação de marketing contínuo da unidade</span>
+          <small>29/06/2026 → 06/07/2026 • 8 dias</small>
+          <small class="governance-note">9 melhorias associadas • Planilha até 06/07/2026 • Consulta em 07/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:17.6768%; width:1.3468%;">AC08</div>
+          
+          <span class="marker marker-red" style="left:18.8552%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:19.0236%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-09</strong>
+          <span>Estruturação da frente comercial para eventos e vendas ativas</span>
+          <small>08/07/2026 → 18/07/2026 • 11 dias</small>
+          <small class="governance-note">9 melhorias associadas • Planilha até 18/07/2026 • Consulta em 19/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:19.1919%; width:1.8519%;">AC09</div>
+          
+          <span class="marker marker-red" style="left:20.8754%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:21.0438%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-10</strong>
+          <span>Estruturação da pré-experiência para aumento de conversão na entrada</span>
+          <small>20/07/2026 → 30/07/2026 • 11 dias</small>
+          <small class="governance-note">9 melhorias associadas • Planilha até 30/07/2026 • Consulta em 31/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:21.2121%; width:1.8519%;">AC10</div>
+          
+          <span class="marker marker-red" style="left:22.8956%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:23.0640%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-11</strong>
+          <span>Estruturação de monetização de espaços ociosos da unidade</span>
+          <small>01/08/2026 → 11/08/2026 • 11 dias</small>
+          <small class="governance-note">9 melhorias associadas • Planilha até 11/08/2026 • Consulta em 12/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:23.2323%; width:1.8519%;">AC11</div>
+          
+          <span class="marker marker-red" style="left:24.9158%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:25.0842%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Grande ABC — AC-12</strong>
+          <span>Padronização da experiência da unidade</span>
+          <small>13/08/2026 → 28/08/2026 • 16 dias</small>
+          <small class="governance-note">10 melhorias associadas • Planilha até 28/08/2026 • Consulta em 29/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar abc" style="left:25.2525%; width:2.6936%;">AC12</div>
+          
+          <span class="marker marker-red" style="left:27.7778%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:27.9461%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    <div class="unit-separator"><div class="unit-separator-text">Pátio Paulista<br><span style='font-size:11px; color:#cbd5e1;'>(Implantação / Acompanhamento / Entrega)</span></div></div>
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-01</strong>
+          <span>Controle e regularização do sistema de ar-condicionado</span>
+          <small>30/04/2026 → 05/05/2026 • 6 dias</small>
+          <small class="governance-note">6 melhorias associadas • Planilha até 05/05/2026 • Consulta em 06/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:7.5758%; width:1.0101%;">AC01</div>
+          
+          <span class="marker marker-red" style="left:8.4175%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:8.5859%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-02</strong>
+          <span>Redes Sociais</span>
+          <small>30/04/2026 → 10/06/2026 • 42 dias</small>
+          <small class="governance-note">12 melhorias associadas • Planilha até 10/06/2026 • Consulta em 11/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:7.5758%; width:7.0707%;">AC02</div>
+          
+          <span class="marker marker-red" style="left:14.4781%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:14.6465%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-03</strong>
+          <span>Pesquisa com clientes</span>
+          <small>01/05/2026 → 09/10/2027 • 527 dias</small>
+          <small class="governance-note">15 melhorias associadas • Planilha até 09/10/2027 • Consulta em 10/10/2027</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:7.7441%; width:88.7205%;">AC03</div>
+          
+          <span class="marker marker-red" style="left:96.2963%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:96.4646%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-04</strong>
+          <span>Implantação de sistema de inteligência de origem da demanda</span>
+          <small>28/04/2026 → 08/05/2026 • 11 dias</small>
+          <small class="governance-note">10 melhorias associadas • Planilha até 08/05/2026 • Consulta em 09/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:7.2391%; width:1.8519%;">AC04</div>
+          
+          <span class="marker marker-red" style="left:8.9226%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:9.0909%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-05</strong>
+          <span>Reconfiguração da entrada para tornar o boliche visível e vendável</span>
+          <small>10/05/2026 → 25/05/2026 • 16 dias</small>
+          <small class="governance-note">14 melhorias associadas • Planilha até 25/05/2026 • Consulta em 26/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:9.2593%; width:2.6936%;">AC05</div>
+          
+          <span class="marker marker-red" style="left:11.7845%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:11.9529%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-06</strong>
+          <span>Implantação de comunicação digital contínua da unidade</span>
+          <small>27/05/2026 → 03/06/2026 • 8 dias</small>
+          <small class="governance-note">11 melhorias associadas • Planilha até 03/06/2026 • Consulta em 04/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:12.1212%; width:1.3468%;">AC06</div>
+          
+          <span class="marker marker-red" style="left:13.2997%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:13.4680%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-07</strong>
+          <span>Estruturação da frente comercial para eventos e vendas ativas</span>
+          <small>05/06/2026 → 15/06/2026 • 11 dias</small>
+          <small class="governance-note">12 melhorias associadas • Planilha até 15/06/2026 • Consulta em 16/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:13.6364%; width:1.8519%;">AC07</div>
+          
+          <span class="marker marker-red" style="left:15.3199%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:15.4882%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-08</strong>
+          <span>Estruturação da pré-experiência para alinhamento de expectativa e aumento de conversão</span>
+          <small>17/06/2026 → 27/06/2026 • 11 dias</small>
+          <small class="governance-note">10 melhorias associadas • Planilha até 27/06/2026 • Consulta em 28/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:15.6566%; width:1.8519%;">AC08</div>
+          
+          <span class="marker marker-red" style="left:17.3401%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:17.5084%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-09</strong>
+          <span>Estruturação de oferta e pacotes da unidade</span>
+          <small>29/06/2026 → 11/07/2026 • 13 dias</small>
+          <small class="governance-note">16 melhorias associadas • Planilha até 11/07/2026 • Consulta em 12/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:17.6768%; width:2.1886%;">AC09</div>
+          
+          <span class="marker marker-red" style="left:19.6970%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:19.8653%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-10</strong>
+          <span>Estruturação de recorrência e relacionamento com clientes</span>
+          <small>13/07/2026 → 23/07/2026 • 11 dias</small>
+          <small class="governance-note">13 melhorias associadas • Planilha até 23/07/2026 • Consulta em 24/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:20.0337%; width:1.8519%;">AC10</div>
+          
+          <span class="marker marker-red" style="left:21.7172%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:21.8855%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-11</strong>
+          <span>Ativação do ambiente como elemento ativo de experiência</span>
+          <small>25/07/2026 → 04/08/2026 • 11 dias</small>
+          <small class="governance-note">13 melhorias associadas • Planilha até 04/08/2026 • Consulta em 05/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:22.0539%; width:1.8519%;">AC11</div>
+          
+          <span class="marker marker-red" style="left:23.7374%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:23.9057%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Pátio Paulista — AC-12</strong>
+          <span>Padronização da operação da unidade</span>
+          <small>06/08/2026 → 21/08/2026 • 16 dias</small>
+          <small class="governance-note">13 melhorias associadas • Planilha até 21/08/2026 • Consulta em 22/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar patio" style="left:24.0741%; width:2.6936%;">AC12</div>
+          
+          <span class="marker marker-red" style="left:26.5993%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:26.7677%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    <div class="unit-separator"><div class="unit-separator-text">Interlagos<br><span style='font-size:11px; color:#cbd5e1;'>(Implantação / Acompanhamento / Entrega)</span></div></div>
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-01</strong>
+          <span>Controle e regularização do sistema de ar-condicionado</span>
+          <small>30/04/2026 → 05/05/2026 • 6 dias</small>
+          <small class="governance-note">6 melhorias associadas • Planilha até 05/05/2026 • Consulta em 06/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:7.5758%; width:1.0101%;">AC01</div>
+          
+          <span class="marker marker-red" style="left:8.4175%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:8.5859%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-02</strong>
+          <span>Redes Sociais</span>
+          <small>30/04/2026 → 10/06/2026 • 42 dias</small>
+          <small class="governance-note">12 melhorias associadas • Planilha até 10/06/2026 • Consulta em 11/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:7.5758%; width:7.0707%;">AC02</div>
+          
+          <span class="marker marker-red" style="left:14.4781%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:14.6465%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-03</strong>
+          <span>Pesquisa com clientes</span>
+          <small>01/05/2026 → 09/10/2027 • 527 dias</small>
+          <small class="governance-note">15 melhorias associadas • Planilha até 09/10/2027 • Consulta em 10/10/2027</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:7.7441%; width:88.7205%;">AC03</div>
+          
+          <span class="marker marker-red" style="left:96.2963%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:96.4646%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-04</strong>
+          <span>Classificação integral da equipe</span>
+          <small>28/04/2026 → 05/05/2026 • 8 dias</small>
+          <small class="governance-note">10 melhorias associadas • Planilha até 05/05/2026 • Consulta em 06/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:7.2391%; width:1.3468%;">AC04</div>
+          
+          <span class="marker marker-red" style="left:8.4175%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:8.5859%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-05</strong>
+          <span>Reposição e reconstrução da equipe</span>
+          <small>07/05/2026 → 22/05/2026 • 16 dias</small>
+          <small class="governance-note">14 melhorias associadas • Planilha até 22/05/2026 • Consulta em 23/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:8.7542%; width:2.6936%;">AC05</div>
+          
+          <span class="marker marker-red" style="left:11.2795%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:11.4478%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-06</strong>
+          <span>Retenção da base operacional</span>
+          <small>24/05/2026 → 23/06/2026 • 31 dias</small>
+          <small class="governance-note">15 melhorias associadas • Planilha até 23/06/2026 • Consulta em 24/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:11.6162%; width:5.2189%;">AC06</div>
+          
+          <span class="marker marker-red" style="left:16.6667%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:16.8350%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-07</strong>
+          <span>Organização da operação</span>
+          <small>25/06/2026 → 10/07/2026 • 16 dias</small>
+          <small class="governance-note">18 melhorias associadas • Planilha até 10/07/2026 • Consulta em 11/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:17.0034%; width:2.6936%;">AC07</div>
+          
+          <span class="marker marker-red" style="left:19.5286%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:19.6970%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-08</strong>
+          <span>Organização do salão</span>
+          <small>12/07/2026 → 22/07/2026 • 11 dias</small>
+          <small class="governance-note">21 melhorias associadas • Planilha até 22/07/2026 • Consulta em 23/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:19.8653%; width:1.8519%;">AC08</div>
+          
+          <span class="marker marker-red" style="left:21.5488%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:21.7172%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-09</strong>
+          <span>Estruturação do consumo</span>
+          <small>24/07/2026 → 08/08/2026 • 16 dias</small>
+          <small class="governance-note">22 melhorias associadas • Planilha até 08/08/2026 • Consulta em 09/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:21.8855%; width:2.6936%;">AC09</div>
+          
+          <span class="marker marker-red" style="left:24.4108%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:24.5791%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-10</strong>
+          <span>Ativação comercial</span>
+          <small>10/08/2026 → 20/08/2026 • 11 dias</small>
+          <small class="governance-note">18 melhorias associadas • Planilha até 20/08/2026 • Consulta em 21/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:24.7475%; width:1.8519%;">AC10</div>
+          
+          <span class="marker marker-red" style="left:26.4310%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:26.5993%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-11</strong>
+          <span>Ativação do ambiente</span>
+          <small>22/08/2026 → 01/09/2026 • 11 dias</small>
+          <small class="governance-note">15 melhorias associadas • Planilha até 01/09/2026 • Consulta em 02/09/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:26.7677%; width:1.8519%;">AC11</div>
+          
+          <span class="marker marker-red" style="left:28.4512%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:28.6195%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Interlagos — AC-12</strong>
+          <span>Padronização operacional</span>
+          <small>03/09/2026 → 23/09/2026 • 21 dias</small>
+          <small class="governance-note">18 melhorias associadas • Planilha até 23/09/2026 • Consulta em 24/09/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar interlagos" style="left:28.7879%; width:3.5354%;">AC12</div>
+          
+          <span class="marker marker-red" style="left:32.1549%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:32.3232%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    <div class="unit-separator"><div class="unit-separator-text">Guarulhos<br><span style='font-size:11px; color:#cbd5e1;'>(Implantação / Acompanhamento / Entrega)</span></div></div>
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-01</strong>
+          <span>Controle e regularização do sistema de ar-condicionado</span>
+          <small>30/04/2026 → 05/05/2026 • 6 dias</small>
+          <small class="governance-note">6 melhorias associadas • Planilha até 05/05/2026 • Consulta em 06/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:7.5758%; width:1.0101%;">AC01</div>
+          
+          <span class="marker marker-red" style="left:8.4175%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:8.5859%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-02</strong>
+          <span>Redes Sociais</span>
+          <small>30/04/2026 → 10/06/2026 • 42 dias</small>
+          <small class="governance-note">12 melhorias associadas • Planilha até 10/06/2026 • Consulta em 11/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:7.5758%; width:7.0707%;">AC02</div>
+          
+          <span class="marker marker-red" style="left:14.4781%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:14.6465%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-03</strong>
+          <span>Pesquisa com clientes</span>
+          <small>01/05/2026 → 09/10/2027 • 527 dias</small>
+          <small class="governance-note">15 melhorias associadas • Planilha até 09/10/2027 • Consulta em 10/10/2027</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:7.7441%; width:88.7205%;">AC03</div>
+          
+          <span class="marker marker-red" style="left:96.2963%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:96.4646%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-04</strong>
+          <span>Proteção imediata da marca e redução de risco reputacional</span>
+          <small>28/04/2026 → 18/05/2026 • 21 dias</small>
+          <small class="governance-note">17 melhorias associadas • Planilha até 18/05/2026 • Consulta em 19/05/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:7.2391%; width:3.5354%;">AC04</div>
+          
+          <span class="marker marker-red" style="left:10.6061%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:10.7744%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-05</strong>
+          <span>Reset de equipe e reconstrução da base operacional</span>
+          <small>20/05/2026 → 09/06/2026 • 21 dias</small>
+          <small class="governance-note">21 melhorias associadas • Planilha até 09/06/2026 • Consulta em 10/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:10.9428%; width:3.5354%;">AC05</div>
+          
+          <span class="marker marker-red" style="left:14.3098%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:14.4781%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-06</strong>
+          <span>Estruturação do recrutamento como processo estratégico</span>
+          <small>11/06/2026 → 21/06/2026 • 11 dias</small>
+          <small class="governance-note">18 melhorias associadas • Planilha até 21/06/2026 • Consulta em 22/06/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:14.6465%; width:1.8519%;">AC06</div>
+          
+          <span class="marker marker-red" style="left:16.3300%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:16.4983%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-07</strong>
+          <span>Reposicionamento estratégico da entrada da unidade</span>
+          <small>23/06/2026 → 08/07/2026 • 16 dias</small>
+          <small class="governance-note">23 melhorias associadas • Planilha até 08/07/2026 • Consulta em 09/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:16.6667%; width:2.6936%;">AC07</div>
+          
+          <span class="marker marker-red" style="left:19.1919%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:19.3603%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-08</strong>
+          <span>Reorganização do salão para otimização de fluxo, ocupação e consumo</span>
+          <small>10/07/2026 → 20/07/2026 • 11 dias</small>
+          <small class="governance-note">25 melhorias associadas • Planilha até 20/07/2026 • Consulta em 21/07/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:19.5286%; width:1.8519%;">AC08</div>
+          
+          <span class="marker marker-red" style="left:21.2121%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:21.3805%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-09</strong>
+          <span>Estruturação do consumo (A&amp;B) como motor ativo de receita</span>
+          <small>22/07/2026 → 01/08/2026 • 11 dias</small>
+          <small class="governance-note">25 melhorias associadas • Planilha até 01/08/2026 • Consulta em 02/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:21.5488%; width:1.8519%;">AC09</div>
+          
+          <span class="marker marker-red" style="left:23.2323%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:23.4007%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-10</strong>
+          <span>Estruturação da frente comercial ativa da unidade</span>
+          <small>03/08/2026 → 23/08/2026 • 21 dias</small>
+          <small class="governance-note">18 melhorias associadas • Planilha até 23/08/2026 • Consulta em 24/08/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:23.5690%; width:3.5354%;">AC10</div>
+          
+          <span class="marker marker-red" style="left:26.9360%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:27.1044%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-11</strong>
+          <span>Ativação do ambiente como elemento ativo de experiência</span>
+          <small>25/08/2026 → 04/09/2026 • 11 dias</small>
+          <small class="governance-note">20 melhorias associadas • Planilha até 04/09/2026 • Consulta em 05/09/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:27.2727%; width:1.8519%;">AC11</div>
+          
+          <span class="marker marker-red" style="left:28.9562%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:29.1246%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+      <div class="calendar-row">
+        <div class="task-info">
+          <strong>Guarulhos — AC-12</strong>
+          <span>Padronização operacional da unidade</span>
+          <small>06/09/2026 → 21/09/2026 • 16 dias</small>
+          <small class="governance-note">23 melhorias associadas • Planilha até 21/09/2026 • Consulta em 22/09/2026</small>
+        </div>
+        <div class="timeline-cell">
+          <div class="bar guarulhos" style="left:29.2929%; width:2.6936%;">AC12</div>
+          
+          <span class="marker marker-red" style="left:31.8182%;" title="Limite para atualização da planilha matriz"></span>
+          <span class="marker marker-blue" style="left:31.9865%;" title="Consulta / liberação da próxima ação"></span>
+        
+        </div>
+      </div>
+    
+  </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span><i class="pre"></i>Pré-RESET</span>
+    <span><i class="meeting"></i>Reuniões Edelson</span>
+    <span><i class="abc"></i>Grande ABC</span>
+    <span><i class="patio"></i>Pátio Paulista</span>
+    <span><i class="interlagos"></i>Interlagos</span>
+    <span><i class="guarulhos"></i>Guarulhos</span>
+    <span><i class="dot-red"></i>Planilha matriz (limite)</span>
+    <span><i class="dot-blue"></i>Consulta / liberação</span>
+    <span><i class="brand-dot"></i>Hoje</span>
+  </div>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+  /* CLASSIFICACAO POR UNIDADE */
+  const unitMap = {
+    'Pré-RESET':  'pre',
+    'Reunião':    'meeting',
+    'Edelson':    'meeting',
+    'Grande ABC': 'abc',
+    'Pátio Paulista': 'patio',
+    'Interlagos': 'interlagos',
+    'Guarulhos':  'guarulhos'
+  };
+  document.querySelectorAll('.calendar-row').forEach(row => {
+    const text = (row.querySelector('.task-info strong')?.textContent || '');
+    let unit = 'other';
+    for (const k in unitMap) { if (text.includes(k)) { unit = unitMap[k]; break; } }
+    row.dataset.unit = unit;
+  });
+
+  /* FILTROS */
+  const chips = document.querySelectorAll('.chip');
+  const activeUnits = new Set([...chips].filter(c => c.classList.contains('active')).map(c => c.dataset.unit));
+  function applyFilters() {
+    const search = (document.getElementById('search').value || '').toLowerCase().trim();
+    document.querySelectorAll('.calendar-row').forEach(row => {
+      const unit = row.dataset.unit;
+      const text = row.textContent.toLowerCase();
+      const visible = activeUnits.has(unit) && (!search || text.includes(search));
+      row.classList.toggle('row-hidden', !visible);
+    });
+    document.querySelectorAll('.unit-separator').forEach(sep => {
+      let next = sep.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('unit-separator')) {
+        if (next.classList.contains('calendar-row') && !next.classList.contains('row-hidden')) {
+          hasVisible = true; break;
+        }
+        next = next.nextElementSibling;
+      }
+      sep.classList.toggle('row-hidden', !hasVisible);
+    });
+  }
+  chips.forEach(c => c.addEventListener('click', () => {
+    const u = c.dataset.unit;
+    if (activeUnits.has(u)) { activeUnits.delete(u); c.classList.remove('active'); }
+    else { activeUnits.add(u); c.classList.add('active'); }
+    applyFilters();
+  }));
+  document.getElementById('search').addEventListener('input', applyFilters);
+
+  /* LINHA DE HOJE */
+  function buildTodayLine() {
+    const months = document.querySelectorAll('.calendar-header .month-label');
+    if (!months.length) return;
+    const monthMap = { 'Jan':0,'Fev':1,'Mar':2,'Abr':3,'Mai':4,'Jun':5,'Jul':6,'Ago':7,'Set':8,'Out':9,'Nov':10,'Dez':11 };
+    const points = [];
+    months.forEach(m => {
+      const txt = m.textContent.trim();
+      const left = parseFloat(m.style.left);
+      // Suporta tambem formato dd/mm/aaaa (ex.: 31/10/2027)
+      if (/^\d{2}\/\d{2}\/\d{4}$/.test(txt)) {
+        const [d, mo, y] = txt.split('/').map(n => parseInt(n,10));
+        points.push({ date: new Date(y, mo-1, d), left });
+      } else {
+        const [mes, ano] = txt.split('/');
+        points.push({ date: new Date(parseInt(ano), monthMap[mes], 1), left });
+      }
+    });
+    points.sort((a,b) => a.date - b.date);
+    const today = new Date();
+    let leftPct = null;
+    for (let i = 0; i < points.length - 1; i++) {
+      const a = points[i], b = points[i+1];
+      if (today >= a.date && today < b.date) {
+        leftPct = a.left + ((today - a.date) / (b.date - a.date)) * (b.left - a.left);
+        break;
+      }
+    }
+    if (leftPct === null) leftPct = today < points[0].date ? 0 : 100;
+    const monthsDiv = document.querySelector('.calendar-header .months');
+    if (monthsDiv) {
+      const line = document.createElement('div');
+      line.id = 'today-line';
+      line.style.left = leftPct + '%';
+      monthsDiv.appendChild(line);
+    }
+    document.querySelectorAll('.timeline-cell').forEach(cell => {
+      const line = document.createElement('div');
+      line.style.cssText = 'position:absolute;top:0;bottom:0;width:2px;background:rgba(168,204,58,.35);left:'+leftPct+'%;z-index:1;pointer-events:none;';
+      cell.appendChild(line);
+    });
+    window.__todayLeftPct = leftPct;
+  }
+  buildTodayLine();
+
+  function scrollToPercent(pct) {
+    const scroller = document.querySelector('.calendar-scroll');
+    if (!scroller) return;
+    const head = document.querySelector('.calendar-header');
+    if (!head) return;
+    const totalWidth = head.scrollWidth;
+    const target = (pct/100) * totalWidth - scroller.clientWidth/2;
+    scroller.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+  }
+  function scrollToToday() { if (window.__todayLeftPct != null) scrollToPercent(window.__todayLeftPct); }
+  function jumpToMonth(label) {
+    const m = [...document.querySelectorAll('.calendar-header .month-label')].find(m => m.textContent.trim() === label);
+    if (m) scrollToPercent(parseFloat(m.style.left));
+  }
+
+  /* TOOLTIP */
+  const tip = document.getElementById('tooltip');
+  function showTooltip(e, html) { tip.innerHTML = html; tip.classList.add('show'); moveTooltip(e); }
+  function moveTooltip(e) {
+    const x = e.clientX + 14, y = e.clientY + 14;
+    const r = tip.getBoundingClientRect();
+    tip.style.left = Math.min(x, window.innerWidth - r.width - 14) + 'px';
+    tip.style.top  = Math.min(y, window.innerHeight - r.height - 14) + 'px';
+  }
+  function hideTooltip() { tip.classList.remove('show'); }
+  document.querySelectorAll('.bar, .marker').forEach(el => {
+    const title = el.getAttribute('title') || '';
+    el.removeAttribute('title');
+    el.addEventListener('mouseenter', e => {
+      let label = 'Ação';
+      if (el.classList.contains('marker-red')) label = 'Planilha matriz';
+      else if (el.classList.contains('marker-blue')) label = 'Consulta / liberação';
+      else if (el.classList.contains('marker-meeting')) label = 'Reunião Edelson';
+      // Para barras, usar texto do task-info da linha (pega o span de descricao)
+      let extra = title;
+      if (el.classList.contains('bar')) {
+        const row = el.closest('.calendar-row');
+        const descEl = row?.querySelector('.task-info span');
+        if (descEl && !title) extra = descEl.textContent;
+      }
+      showTooltip(e, '<strong>' + label + '</strong>' + (extra || ''));
+    });
+    el.addEventListener('mousemove', moveTooltip);
+    el.addEventListener('mouseleave', hideTooltip);
+  });
+
+  /* INIT */
+  setTimeout(() => { scrollToToday(); }, 200);
+</script>
+</body>
+</html>
